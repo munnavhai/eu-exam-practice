@@ -22,9 +22,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
+          
+      - name: Diagnose npm configuration
+        run: |
+          node --version
+          npm --version
+          npm config list
+          ls -la
+          test ! -f .npmrc || cat .npmrc
+          
       - name: Install dependencies
-        run: npm
+        run: npm install --verbose
 
       - name: Build application
         run: npm run build
